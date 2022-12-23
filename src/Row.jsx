@@ -5,6 +5,7 @@ import YouTube from "react-youtube";
 import MovieTrailer from "movie-trailer";
 import CancelRoundedIcon from '@material-ui/icons/CancelRounded';
 
+// await MovieTrailer( 'Up' );
 // import LiteYouTubeEmbed from 'react-lite-youtube-embed';
 // import 'react-lite-youtube-embed/dist/LiteYouTubeEmbed.css'
 
@@ -19,9 +20,11 @@ function Row({ title, fetchUrl, isLarge, scroll }) {
         async function fetchData() {
             const request = await axios.get(fetchUrl);
             setMovies(request.data.results);
+            console.log(request.data.results);
             return request;
         }
         fetchData();
+        
     }, [fetchUrl]);
 
     const opts = {
@@ -35,13 +38,19 @@ function Row({ title, fetchUrl, isLarge, scroll }) {
     const handleClick = ( movie ) => {
         if ( trailerUrl ) {
             setTrailerUrl( "" );
+            console.log(trailerUrl)
+            
         } else {
-            MovieTrailer( movie?.name || movie?.original_name || movie?.title || "" )
-                .then( ( url ) => {
-                    const urlParams = new URLSearchParams( new URL( url ).search );
-                    setTrailerUrl( urlParams.get( "v" ) );
+            console.log(movie.name + " " + movie.first_air_date.slice(0,4));
+            // console.log();
+            MovieTrailer(movie.name, {year: movie.first_air_date.slice(0,4), multi: true}).then( ( res ) => {
+
+                    console.log(res);
+                    // const urlParams = new URLSearchParams( new URL( url ).search );
+                    // console.log(urlParams)
+                    // setTrailerUrl( urlParams.get( "v" ) );
                 } )
-                .catch( ( error ) => console.log( error ) );
+                .catch( ( error ) => console.log( error + "err in movie video fetching" ) );
         }
     };
 
@@ -58,7 +67,7 @@ function Row({ title, fetchUrl, isLarge, scroll }) {
 						key={movie.id}
 						className="row__poster"
 					    src={`${baseUrl}${isLarge ? movie.poster_path : movie.poster_path}`}
-				        alt={movie.name} />
+				        alt={movie.name + "movie poster"} />
 				))}
             </div>
 
