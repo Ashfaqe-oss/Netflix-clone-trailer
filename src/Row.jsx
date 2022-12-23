@@ -5,6 +5,9 @@ import YouTube from "react-youtube";
 import MovieTrailer from "movie-trailer";
 import CancelRoundedIcon from '@material-ui/icons/CancelRounded';
 
+// import LiteYouTubeEmbed from 'react-lite-youtube-embed';
+// import 'react-lite-youtube-embed/dist/LiteYouTubeEmbed.css'
+
 const baseUrl = "https://image.tmdb.org/t/p/original/";
 
 function Row({ title, fetchUrl, isLarge, scroll }) {
