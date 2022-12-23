@@ -20,7 +20,7 @@ function Row({ title, fetchUrl, isLarge, scroll }) {
         async function fetchData() {
             const request = await axios.get(fetchUrl);
             setMovies(request.data.results);
-            console.log(request.data.results);
+            // console.log(request.data.results);
             return request;
         }
         fetchData();
@@ -38,10 +38,10 @@ function Row({ title, fetchUrl, isLarge, scroll }) {
     const handleClick = ( movie ) => {
         if ( trailerUrl ) {
             setTrailerUrl( "" );
-            console.log(trailerUrl)
+            // console.log(trailerUrl)
             
         } else {
-            console.log(movie.name + " " + movie.first_air_date.slice(0,4));
+            // console.log(movie.name + " " + movie.first_air_date.slice(0,4));
             // console.log();
             MovieTrailer(movie.name, {year: movie.first_air_date.slice(0,4), multi: true}).then( ( res ) => {
 
